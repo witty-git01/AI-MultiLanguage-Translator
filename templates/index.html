@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>AI-Powered Multi-Language Translator</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <!-- Background -->
+
+    <div class="background-blur blur-1"></div>
+
+    <div class="background-blur blur-2"></div>
+
+    <div class="container">
+      <!-- Header -->
+
+      <div class="header">
+        <h1>AI-Powered Multi-Language Translator</h1>
+
+        <p>
+          Translate multilingual documents into your preferred language while
+          generating AI-powered summaries, key points and action items.
+        </p>
+      </div>
+
+      <!-- Input Card -->
+
+      <div class="input-card">
+        <form action="/translate" method="POST" enctype="multipart/form-data">
+          <div class="section-header">
+            <h2>Document Input</h2>
+
+            <span>Choose any input method</span>
+          </div>
+
+          <!-- Target Language -->
+
+          <div class="form-group">
+            <label for="target-language"> Translate To </label>
+
+            <select id="target-language" name="target_language">
+              <option value="English" selected>🇺🇸 English</option>
+
+              <option value="Hindi">🇮🇳 Hindi</option>
+
+              <option value="German">🇩🇪 German</option>
+
+              <option value="French">🇫🇷 French</option>
+
+              <option value="Spanish">🇪🇸 Spanish</option>
+
+              <option value="Italian">🇮🇹 Italian</option>
+
+              <option value="Portuguese">🇵🇹 Portuguese</option>
+            </select>
+          </div>
+
+          <!-- Paste Text -->
+
+          <div class="form-group">
+            <label for="user_text"> Paste Text </label>
+
+            <textarea
+              id="user_text"
+              name="user_text"
+              placeholder="Paste any paragraph, email, article or document here..."
+            ></textarea>
+          </div>
+
+          <!-- Divider -->
+
+          <div class="divider">
+            <span>OR</span>
+          </div>
+
+          <!-- PDF Upload -->
+
+          <div class="form-group">
+            <label> Upload PDF </label>
+
+            <label id="drop-area" for="pdf-upload">
+              <div class="upload-icon">📄</div>
+
+              <h3>Drag & Drop PDF Here</h3>
+
+              <p>or click to browse</p>
+
+              <span id="file-name"> No file selected </span>
+            </label>
+
+            <input
+              id="pdf-upload"
+              type="file"
+              name="pdf_file"
+              accept=".pdf"
+              hidden
+            />
+          </div>
+
+          <!-- Submit -->
+
+          <button id="translate-btn" type="submit">
+            Translate & Analyze →
+          </button>
+        </form>
+      </div>
+
+      <!-- Detected Language -->
+
+      <div class="language-card">
+        <span class="language-label"> 🌍 Detected Language </span>
+
+        <span class="language-value" id="language-value"> - </span>
+      </div>
+
+      <!-- Results -->
+
+      <div class="results">
+        <!-- Translation -->
+
+        <div
+          class="card expandable-card"
+          data-title="Translation"
+          data-content=""
+        >
+          <h3>🌐 Translation</h3>
+
+          <p id="translation-preview">Translation will appear here...</p>
+        </div>
+
+        <!-- Summary -->
+
+        <div class="card expandable-card" data-title="Summary" data-content="">
+          <h3>📝 Summary</h3>
+
+          <p id="summary-preview">Summary will appear here...</p>
+        </div>
+
+        <!-- Key Points -->
+
+        <div
+          class="card expandable-card"
+          data-title="Key Points"
+          data-content=""
+        >
+          <h3>📌 Key Points</h3>
+
+          <div id="keypoints-preview">Key points will appear here...</div>
+        </div>
+
+        <!-- Action Items -->
+
+        <div
+          class="card expandable-card"
+          data-title="Action Items"
+          data-content=""
+        >
+          <h3>✅ Action Items</h3>
+
+          <div id="actionitems-preview">Action items will appear here...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup -->
+
+    <div id="overlay">
+      <div id="popup-card">
+        <button id="close-popup">&times;</button>
+
+        <h2 id="popup-title"></h2>
+
+        <div id="popup-content"></div>
+
+        <button id="copy-btn">📋 Copy</button>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
